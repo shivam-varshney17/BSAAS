@@ -55,15 +55,15 @@ function AboutContent() {
       transition={{ duration: 0.8 }}
       className="space-y-6"
     >
-      <h3 className="text-2xl font-bold text-white">Full-Stack Developer & AI Specialist</h3>
+      <h3 className="text-2xl md:text-3xl font-bold text-white">Full-Stack Developer & AI Specialist</h3>
       
-      <p className="text-gray-300">
+      <p className="text-gray-300 text-sm md:text-base">
         I'm Shivam, a passionate developer with expertise in building AI-powered web applications
         and scalable systems. Currently pursuing my BTech in Computer Science Engineering at VIT, 
         I've worked on diverse projects from enterprise solutions to innovative startups.
       </p>
       
-      <p className="text-gray-300">
+      <p className="text-gray-300 text-sm md:text-base">
         My focus is on creating intelligent applications that leverage the latest in AI technology
         while maintaining exceptional user experiences. I specialize in developing custom AI agents,
         natural language processing systems, and data-driven applications.
@@ -167,13 +167,20 @@ function InteractiveGlobe() {
     >
       <div className="globe-container w-full h-full rounded-full relative overflow-hidden">
         <div className="globe bg-gradient-to-br from-blue-600/20 via-indigo-600/20 to-purple-600/20 w-full h-full rounded-full border border-blue-500/20 relative">
+          <div className="absolute top-1/4 left-1/4 w-12 h-12 flex items-center justify-center">
+            <span className="text-white">React</span>
+          </div>
+          <div className="absolute top-1/2 left-1/2 w-12 h-12 flex items-center justify-center">
+            <span className="text-white">Node.js</span>
+          </div>
+          <div className="absolute bottom-1/4 right-1/4 w-12 h-12 flex items-center justify-center">
+            <span className="text-white">Python</span>
+          </div>
           <div className="globe-highlight absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-white/10 rounded-full blur-md"></div>
           
-          {/* Orbit elements */}
           <div className="orbit orbit-1 absolute top-0 left-0 w-full h-full rounded-full border border-blue-500/30 animate-spin-slow"></div>
           <div className="orbit orbit-2 absolute top-[5%] left-[5%] w-[90%] h-[90%] rounded-full border border-purple-500/20 animate-spin-slower"></div>
           
-          {/* Tech nodes on orbits */}
           <motion.div 
             className="tech-node absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-blue-500 shadow-md shadow-blue-500/50"
             animate={{ rotate: 360 }} 
@@ -198,11 +205,9 @@ function InteractiveGlobe() {
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
           ></motion.div>
           
-          {/* Add glowing effect */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-indigo-500/5 rounded-full blur-xl"></div>
         </div>
         
-        {/* Infinity scroll effect for skills */}
         <div className="skills-container absolute -bottom-4 left-0 right-0 overflow-hidden h-10">
           <motion.div 
             className="skills flex space-x-6 text-gray-300/80"

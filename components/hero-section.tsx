@@ -48,8 +48,8 @@ export function HeroSection() {
           transition={{ duration: 0.8 }}
           className="space-y-2 mb-6"
         >
-          <h2 className="text-xl md:text-2xl font-medium text-gray-300">Hello, I'm</h2>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+          <h2 className="text-lg md:text-2xl font-medium text-gray-300">Hello, I'm</h2>
+          <h1 className="text-3xl md:text-6xl font-bold tracking-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-300 to-gray-500">
               Shivam
             </span>
@@ -72,7 +72,7 @@ export function HeroSection() {
             ]}
             speed={70}
             delay={2000}
-            className="text-xl md:text-3xl font-medium text-gray-200"
+            className="text-lg md:text-3xl font-medium text-gray-200"
           />
         </motion.div>
         
@@ -80,7 +80,7 @@ export function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="max-w-2xl text-gray-300 mb-10 text-lg"
+          className="max-w-md text-gray-300 mb-10 text-lg"
         >
           I create innovative digital experiences that combine cutting-edge AI technology 
           with exceptional user experiences. Specializing in AI agents, full-stack development,
@@ -91,7 +91,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="flex flex-col sm:flex-row gap-4 mb-12"
+          className="flex flex-col sm:flex-row gap-2 mb-12"
         >
           <Button 
             size="lg" 
@@ -104,7 +104,7 @@ export function HeroSection() {
           <Button 
             size="lg" 
             variant="outline" 
-            className="border-gray-300 text-black hover:bg-gray-800"
+            className="border-gray-300 text-black bg-white"
             onClick={() => window.location.href = '#contact'}
           >
             Get in Touch

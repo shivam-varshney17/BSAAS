@@ -8,7 +8,7 @@ import { Navbar } from '@/components/navbar'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white">
+    <main className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white overflow-hidden px-4">
       <Navbar />
       <HeroSection />
       <ProjectsSection />

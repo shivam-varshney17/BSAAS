@@ -63,27 +63,27 @@ export function ProjectsSection() {
   const isInView = useInView(ref, { once: false, amount: 0.1 })
   
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-gray-900 to-black">
+    <section id="projects" className="py-8 md:py-20 bg-gradient-to-b from-gray-900 to-black">
       <div className="container mx-auto px-4">
         <motion.div 
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-6 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-2xl md:text-4xl font-bold mb-2">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-300 to-gray-500">
               Featured Projects
             </span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-400 max-w-md mx-auto text-sm md:text-base">
             A collection of my most significant work in AI and full-stack development.
             Each project represents a unique challenge and innovative solution.
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
@@ -93,11 +93,11 @@ export function ProjectsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-12 flex justify-center"
+          className="mt-6 flex justify-center"
         >
           <a 
             href="/projects" 
-            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-medium rounded-md flex items-center group transition-all duration-300 shadow-lg hover:shadow-blue-700/20"
+            className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-medium rounded-md flex items-center group transition-all duration-300 shadow-lg hover:shadow-blue-700/20"
           >
             View All Projects
             <ArrowUpRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -122,12 +122,13 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
       className={cn(
         "group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700",
         "hover:shadow-xl hover:shadow-gray-900/20 transition-all duration-300",
-        project.featured ? "md:col-span-2" : ""
+        project.featured ? "md:col-span-2" : "",
+        "p-6 md:p-8"
       )}
     >
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent opacity-80 z-10"></div>
       
-      <div className="relative aspect-video overflow-hidden">
+      <div className="relative aspect-[16/9] overflow-hidden">
         <img 
           src={project.image} 
           alt={project.title}
@@ -145,18 +146,18 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
             ))}
           </div>
           
-          <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-gray-100 transition-colors">
+          <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-gray-100 transition-colors">
             {project.title}
           </h3>
           
-          <p className="text-gray-200 text-base md:text-lg line-clamp-2 group-hover:text-white transition-colors font-medium">
+          <p className="text-gray-200 text-sm md:text-base line-clamp-2 group-hover:text-white transition-colors font-medium">
             {project.description}
           </p>
           
-          <div className="flex items-center gap-4 pt-3">
+          <div className="flex items-center gap-2 pt-3">
             <a 
               href={project.link} 
-              className="inline-flex items-center text-white bg-blue-600/80 hover:bg-blue-600 px-3 py-1 rounded transition-colors text-base font-medium"
+              className="inline-flex items-center text-white bg-blue-600/80 hover:bg-blue-600 px-3 py-1 rounded transition-colors text-sm md:text-base font-medium"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -167,7 +168,7 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
             {project.github && (
               <a 
                 href={project.github} 
-                className="inline-flex items-center text-white bg-gray-700/80 hover:bg-gray-700 px-3 py-1 rounded transition-colors text-base font-medium"
+                className="inline-flex items-center text-white bg-gray-700/80 hover:bg-gray-700 px-3 py-1 rounded transition-colors text-sm md:text-base font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
               >

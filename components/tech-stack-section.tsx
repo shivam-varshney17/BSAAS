@@ -59,7 +59,7 @@ export function TechStackSection() {
               Tech Stack
             </span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-400 max-w-md mx-auto text-sm md:text-base">
             The technologies, frameworks, and tools I use to build powerful applications.
           </p>
         </motion.div>

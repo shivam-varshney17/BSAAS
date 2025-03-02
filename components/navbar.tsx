@@ -38,7 +38,7 @@ export function Navbar() {
           isScrolled ? "bg-black/80 backdrop-blur-md py-3 shadow-lg" : "bg-transparent py-5"
         )}
       >
-        <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="container mx-auto flex justify-between items-center px-4">
           <a href="#" className="text-2xl font-bold text-white">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
               Shivam
@@ -46,7 +46,7 @@ export function Navbar() {
           </a>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-4">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.name}

@@ -47,7 +47,7 @@ export function ContactSection() {
               Get In Touch
             </span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-400 max-w-md mx-auto text-sm md:text-base">
             Have a project in mind or want to discuss a potential collaboration?
             I'd love to hear from you.
           </p>
