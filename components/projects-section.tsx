@@ -61,11 +61,11 @@ const projects: Project[] = [
 export function ProjectsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.1 })
-  
+
   return (
     <section id="projects" className="py-8 md:py-20 bg-gradient-to-b from-gray-900 to-black">
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -82,25 +82,26 @@ export function ProjectsSection() {
             Each project represents a unique challenge and innovative solution.
           </p>
         </motion.div>
-        
+
+        {/* Adjusted grid layout for mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-6 flex justify-center"
         >
-          <a 
-            href="/projects" 
-            className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-medium rounded-md flex items-center group transition-all duration-300 shadow-lg hover:shadow-blue-700/20"
+          <a
+            href="/projects"
+            className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:bg-blue-700 hover:text-indigo-800 text-white font-medium rounded-md flex items-center group transition-all duration-300 shadow-lg hover:shadow-blue-700/20"
           >
             View All Projects
-            <ArrowUpRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            <ArrowUpRight className="ml-2 h-5 w-5 transition-transform group-hover:-translate-y-[2px]" />
           </a>
         </motion.div>
       </div>
@@ -108,72 +109,80 @@ export function ProjectsSection() {
   )
 }
 
-function ProjectCard({ project, index }: { project: Project, index: number }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.1 })
-  
+
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      whileHover={{ y: -5 }}
       className={cn(
         "group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700",
         "hover:shadow-xl hover:shadow-gray-900/20 transition-all duration-300",
         project.featured ? "md:col-span-2" : "",
-        "p-6 md:p-8"
+        "p-4 sm:p-6"
       )}
     >
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent opacity-80 z-10"></div>
-      
-      <div className="relative aspect-[16/9] overflow-hidden">
-        <img 
-          src={project.image} 
+      {/* Adjusted image height for mobile */}
+      <div className="relative aspect-[16/9] overflow-hidden h-[180px] sm:h-[220px]">
+        <img
+          src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
         />
       </div>
-      
-      <div className="absolute inset-0 z-20 flex flex-col justify-end p-4">
-        <div className="space-y-2">
-          <div className="flex flex-wrap gap-2 mb-2">
-            {project.tags.map(tag => (
-              <Badge key={tag} variant="outline" className="bg-black/60 text-gray-200 border-gray-600 font-medium">
+
+      {/* Content Section */}
+      <div className="absolute inset-x-0 bottom-0 z-20 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+        <div className="space-y-[6px] sm:space-y-[8px]">
+          {/* Tags */}
+          <div className="flex flex-wrap gap-x-[6px] gap-y-[4px] mb-[6px]">
+            {project.tags.map((tag) => (
+              <Badge
+                key={tag}
+                variant="outline"
+                className="bg-black/60 text-gray-200 border-gray-600 font-medium text-xs sm:text-sm"
+              >
                 {tag}
               </Badge>
             ))}
           </div>
-          
-          <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-gray-100 transition-colors">
+
+          {/* Title */}
+          <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-gray-100 transition-colors">
             {project.title}
           </h3>
-          
-          <p className="text-gray-200 text-sm md:text-base line-clamp-2 group-hover:text-white transition-colors font-medium">
+
+          {/* Description */}
+          <p className="text-gray-200 text-xs sm:text-sm line-clamp-[3] group-hover:text-white transition-colors font-medium">
             {project.description}
           </p>
-          
-          <div className="flex items-center gap-2 pt-3">
-            <a 
-              href={project.link} 
-              className="inline-flex items-center text-white bg-blue-600/80 hover:bg-blue-600 px-3 py-1 rounded transition-colors text-sm md:text-base font-medium"
+
+          {/* Buttons */}
+          <div className="flex items-center gap-x-[6px] pt-[8px]">
+            <a
+              href={project.link}
+              className="inline-flex items-center text-white bg-blue-600/80 hover:bg-blue-600 px-[10px] py-[6px] rounded transition-colors text-xs sm:text-sm font-medium"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span>View Project</span>
-              <ArrowUpRight className="ml-1 h-4 w-4" />
+              View Project
+              <ArrowUpRight className="ml-[4px] h-[14px] w-[14px]" />
             </a>
-            
+
             {project.github && (
-              <a 
-                href={project.github} 
-                className="inline-flex items-center text-white bg-gray-700/80 hover:bg-gray-700 px-3 py-1 rounded transition-colors text-sm md:text-base font-medium"
+              <a
+                href={project.github}
+                className="inline-flex items-center text-white bg-gray-700/80 hover:bg-gray-700 px-[10px] py-[6px] rounded transition-colors text-xs sm:text-sm font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github className="mr-1 h-4 w-4" />
-                <span>Code</span>
+                <Github className="mr-[4px] h-[14px] w-[14px]" />
+                Code
               </a>
             )}
           </div>
