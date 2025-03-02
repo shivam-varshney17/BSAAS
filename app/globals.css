@@ -80,3 +80,140 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Futuristic Tech Theme Custom CSS */
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+}
+
+/* Glowing text effect */
+.glow-text {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+}
+
+.glow-text-purple {
+  text-shadow: 0 0 10px rgba(99, 102, 241, 0.7);
+}
+
+.glow-text-gold {
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.7);
+}
+
+/* Data stream animation */
+.data-stream {
+  background: linear-gradient(
+    to right,
+    rgba(59, 130, 246, 0),
+    rgba(59, 130, 246, 0.2),
+    rgba(59, 130, 246, 0)
+  );
+  background-size: 200% 100%;
+  animation: data-flow 5s linear infinite;
+}
+
+/* Terminal text effect for code displays */
+.terminal-text {
+  font-family: "JetBrains Mono", monospace;
+  color: #3b82f6;
+}
+
+/* Futuristic border glow */
+.border-glow {
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.border-glow:hover {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+}
+
+/* Circuit board background animation */
+.circuit-animate {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath fill='%233b82f6' fill-opacity='0.1' d='M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'%3E%3C/path%3E%3C/svg%3E");
+  animation: circuit-drift 60s linear infinite;
+}
+
+@keyframes circuit-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 1000px;
+  }
+}
+
+/* Glass morphism effect */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: 8px;
+}
+
+/* AI typing indicator */
+.ai-typing::after {
+  content: "_";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Neon outline */
+.neon-outline {
+  position: relative;
+}
+
+.neon-outline::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(45deg, #3b82f6, #6366f1, #fbbf24, #3b82f6);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  background-size: 200% 200%;
+  animation: neon-rotate 4s linear infinite;
+}
+
+@keyframes neon-rotate {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .glass-panel {
+    backdrop-filter: blur(8px);
+  }
+  
+  .border-glow {
+    box-shadow: 0 0 3px rgba(59, 130, 246, 0.4);
+  }
+  
+  .border-glow:hover {
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+  }
+}

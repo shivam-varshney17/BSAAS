@@ -1,126 +1,134 @@
 "use client"
 
 import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence, useScroll } from 'framer-motion'
+import { Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { ThemeToggle } from '@/components/theme-toggle'
+
+const links = [
+  { name: "Home", href: "#" },
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#contact" },
+]
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { scrollYProgress } = useScroll()
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
-    
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'About', href: '#about' },
-    { name: 'Tech Stack', href: '#tech-stack' },
-    { name: 'Contact', href: '#contact' },
-  ]
-
   return (
-    <>
-      <motion.header 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled ? "bg-black/80 backdrop-blur-md py-3 shadow-lg" : "bg-transparent py-5"
-        )}
-      >
-        <div className="container mx-auto flex justify-between items-center px-4">
-          <a href="#" className="text-2xl font-bold text-white">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-              Shivam
-            </span>
-          </a>
-          
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4">
-            {navLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-gray-300 hover:text-white transition-colors"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
-                {link.name}
-              </motion.a>
+    <motion.header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-slate-900/90 backdrop-blur-md py-3' : 'bg-transparent py-5'
+      }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
+        <a href="#" className="font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-blue-500">Shivam</a>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
+          <ul className="flex space-x-8">
+            {links.map((link) => (
+              <li key={link.name}>
+                <a
+                  href={link.href}
+                  className="text-white hover:text-blue-400 text-base font-medium transition-colors relative group"
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </li>
             ))}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 0.5 }}
-            >
-              <Button className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 border border-gray-700">
-                Resume
-              </Button>
-            </motion.div>
-          </nav>
+          </ul>
           
-          {/* Mobile Menu Button */}
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            className="md:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
-        </div>
-      </motion.header>
-      
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
+            
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+            >
+              Resume <Download className="h-4 w-4" />
+            </a>
+          </div>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-3 text-white focus:outline-none"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <div className="w-6 flex flex-col space-y-1.5">
+            <motion.span
+              animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+              className="block h-0.5 w-full bg-white"
+            ></motion.span>
+            <motion.span
+              animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+              className="block h-0.5 w-full bg-white"
+            ></motion.span>
+            <motion.span
+              animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+              className="block h-0.5 w-full bg-white"
+            ></motion.span>
+          </div>
+        </button>
+      </div>
+
       {/* Mobile Menu */}
       <AnimatePresence>
-        {isMenuOpen && (
+        {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-16 left-0 right-0 z-40 bg-black/95 backdrop-blur-lg md:hidden"
+            className="md:hidden bg-slate-900 border-t border-slate-800"
           >
-            <div className="container mx-auto px-4 py-6 flex flex-col space-y-4">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="text-gray-300 hover:text-white py-2 border-b border-gray-800"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.5 }}
-                className="pt-4"
-              >
-                <Button className="w-full bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 border border-gray-700">
-                  Resume
-                </Button>
-              </motion.div>
+            <div className="container mx-auto px-4 py-6">
+              <ul className="flex flex-col space-y-4">
+                {links.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-white hover:text-blue-400 text-base font-medium transition-colors block py-2"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+                <li className="pt-4 flex flex-col gap-4 border-t border-slate-800">
+                  <ThemeToggle />
+                  <a
+                    href="/resume.pdf"
+                    target="_blank"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors w-fit"
+                  >
+                    Resume <Download className="h-4 w-4" />
+                  </a>
+                </li>
+              </ul>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </motion.header>
   )
 }

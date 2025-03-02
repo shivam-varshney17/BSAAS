@@ -44,8 +44,15 @@ export function TechStackSection() {
   const isInView = useInView(ref, { once: false, amount: 0.1 })
   
   return (
-    <section id="tech-stack" className="py-20 bg-gradient-to-b from-gray-900 to-black">
-      <div className="container mx-auto px-4">
+    <section id="tech-stack" className="py-20 relative overflow-hidden">
+      {/* AI-themed background */}
+      <div className="absolute inset-0 bg-cyber-black">
+        <div className="absolute inset-0 bg-circuit-pattern opacity-5"></div>
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-blue to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-purple to-transparent"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -53,34 +60,46 @@ export function TechStackSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-300 to-gray-500">
-              Tech Stack
-            </span>
-          </h2>
+          <div className="inline-flex items-center justify-center mb-4">
+            <div className="h-px w-8 bg-neon-blue/50"></div>
+            <h2 className="text-3xl md:text-4xl font-bold mx-4">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink">
+                Tech Stack
+              </span>
+            </h2>
+            <div className="h-px w-8 bg-neon-purple/50"></div>
+          </div>
           <p className="text-gray-400 max-w-md mx-auto text-sm md:text-base">
-            The technologies, frameworks, and tools I use to build powerful applications.
+            The technologies and frameworks I use to build intelligent AI systems and applications
           </p>
         </motion.div>
         
-        <div className="space-y-12">
+        <div className="space-y-16">
+          <TechCategory 
+            title="AI & Machine Learning" 
+            subtitle="Building intelligent systems"
+            color="neon-pink"
+            technologies={technologies.filter(tech => tech.category === 'ai')} 
+          />
+          
           <TechCategory 
             title="Frontend Development" 
+            subtitle="Creating seamless interfaces"
+            color="neon-blue"
             technologies={technologies.filter(tech => tech.category === 'frontend')} 
           />
           
           <TechCategory 
             title="Backend & Databases" 
+            subtitle="Powering robust applications"
+            color="neon-purple"
             technologies={technologies.filter(tech => tech.category === 'backend')} 
           />
           
           <TechCategory 
-            title="AI & Machine Learning" 
-            technologies={technologies.filter(tech => tech.category === 'ai')} 
-          />
-          
-          <TechCategory 
             title="DevOps & Cloud" 
+            subtitle="Scaling with confidence"
+            color="neon-blue"
             technologies={technologies.filter(tech => tech.category === 'devops')} 
           />
         </div>
@@ -89,9 +108,33 @@ export function TechStackSection() {
   )
 }
 
-function TechCategory({ title, technologies }: { title: string, technologies: Technology[] }) {
+function TechCategory({ 
+  title, 
+  subtitle,
+  color,
+  technologies 
+}: { 
+  title: string, 
+  subtitle: string,
+  color: string,
+  technologies: Technology[] 
+}) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.1 })
+  
+  // Helper for color classes
+  const getColorClasses = (colorName: string) => {
+    switch(colorName) {
+      case 'neon-blue':
+        return 'bg-neon-blue';
+      case 'neon-purple':
+        return 'bg-neon-purple';
+      case 'neon-pink':
+        return 'bg-neon-pink';
+      default:
+        return 'bg-neon-blue';
+    }
+  };
   
   return (
     <motion.div
@@ -99,13 +142,19 @@ function TechCategory({ title, technologies }: { title: string, technologies: Te
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.8 }}
-      className="space-y-6"
+      className="relative"
     >
-      <h3 className="text-xl font-semibold text-white">{title}</h3>
+      <div className="mb-6">
+        <h3 className="text-xl font-bold text-white font-mono inline-flex items-center">
+          <span className={`inline-block w-3 h-3 rounded-full ${getColorClasses(color)} mr-2`}></span>
+          {title}
+        </h3>
+        <p className="text-gray-400 text-sm ml-5">{subtitle}</p>
+      </div>
       
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
         {technologies.map((tech, index) => (
-          <TechCard key={tech.name} technology={tech} index={index} isInView={isInView} />
+          <TechCard key={tech.name} technology={tech} index={index} isInView={isInView} color={color} />
         ))}
       </div>
     </motion.div>
@@ -115,36 +164,56 @@ function TechCategory({ title, technologies }: { title: string, technologies: Te
 function TechCard({ 
   technology, 
   index, 
-  isInView 
+  isInView,
+  color
 }: { 
   technology: Technology, 
   index: number,
-  isInView: boolean
+  isInView: boolean,
+  color: string
 }) {
+  // Helper for glow color classes
+  const getGlowClasses = (colorName: string) => {
+    switch(colorName) {
+      case 'neon-blue':
+        return 'bg-neon-blue';
+      case 'neon-purple':
+        return 'bg-neon-purple';
+      case 'neon-pink':
+        return 'bg-neon-pink';
+      default:
+        return 'bg-neon-blue';
+    }
+  };
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      whileHover={{ 
-        y: -5, 
-        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-        transition: { duration: 0.2 } 
-      }}
-      className={cn(
-        "flex flex-col items-center justify-center p-4 rounded-lg",
-        "bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700",
-        "hover:border-gray-600 transition-all duration-300"
-      )}
+      whileHover={{ y: -5 }}
+      className="flex flex-col items-center"
     >
-      <div className="w-12 h-12 mb-3 flex items-center justify-center">
-        <img 
-          src={technology.icon} 
-          alt={technology.name} 
-          className="max-w-full max-h-full object-contain"
-        />
-      </div>
-      <span className="text-sm text-gray-300">{technology.name}</span>
+      <motion.div 
+        className="relative mb-3 w-16 h-16 flex items-center justify-center"
+        whileHover={{ 
+          scale: 1.1,
+          transition: { duration: 0.2 } 
+        }}
+      >
+        {/* Glowing Background */}
+        <div className={`absolute inset-0 rounded-full opacity-20 ${getGlowClasses(color)} blur-lg`}></div>
+        
+        {/* Image Container */}
+        <div className="relative z-10">
+          <img 
+            src={technology.icon} 
+            alt={technology.name} 
+            className="w-12 h-12 object-contain"
+          />
+        </div>
+      </motion.div>
+      <span className="text-sm text-gray-300 font-mono">{technology.name}</span>
     </motion.div>
   )
 }
