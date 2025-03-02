@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Award, Briefcase, GraduationCap, Bot, Code, Brain, Cpu, Database, GitHub, Globe } from 'lucide-react'
+import { ArrowRight, Award, Briefcase, GraduationCap, Bot, Code, Brain, Cpu, Database, Github, Globe } from 'lucide-react'
 
 export function AboutSection() {
   const ref = useRef(null)
