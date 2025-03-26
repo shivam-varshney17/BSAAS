@@ -45,6 +45,13 @@ export default function RootLayout({
             {children}
           </SmoothScrollProvider>
         </ThemeProvider>
+        <script dangerouslySetInnerHTML={{ __html: `
+          window.chatbotConfig = {
+            clientId: "5b32a5a8-e69d-4b52-ace0-9c510c6af498",
+            namespace: "shivamvarshney2500.netlify.app"
+          };
+        `}} />
+        <script src="https://api.nutonai.com/widget/widget.js" async />
       </body>
     </html>
   );
