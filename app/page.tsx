@@ -23,13 +23,6 @@ export default function Home() {
         <ContactSection />
         <Footer />
       </div>
-      <script>
-    window.chatbotConfig = {
-        clientId: "5b32a5a8-e69d-4b52-ace0-9c510c6af498",
-        namespace: "shivamvarshney2500.netlify.app"
-    };
-</script>
-<script src="https://api.nutonai.com/widget/widget.js" async></script>
-    </main>
+     </main>
   )
 }
